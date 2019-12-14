@@ -37,11 +37,24 @@ public class user_data extends Fragment {
     }
 
     userDisplayAdapter ua;
+    View view;
+
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_user_data, container, false);
+        view = inflater.inflate(R.layout.fragment_user_data, container, false);
+
+
+
+        return view;
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
         Button add;
         ListView lv;
         lv = view.findViewById(R.id.view_data);
@@ -54,7 +67,7 @@ public class user_data extends Fragment {
 //            ArrayAdapter<String> adapter = new ArrayAdapter<>(inflater.getContext(), android.R.layout.simple_list_item_1, name);
 //            lv.setAdapter(adapter);
 
-             ua = new userDisplayAdapter(inflater.getContext(),R.layout.layout_list,UserData.data);
+            ua = new userDisplayAdapter(getContext(),R.layout.layout_list,UserData.data);
             lv.setAdapter(ua);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -66,28 +79,16 @@ public class user_data extends Fragment {
             });
 
         }
-            add = view.findViewById(R.id.add_user);
-            add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(inflater.getContext(), register_user.class);
-                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+        add = view.findViewById(R.id.add_user);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), register_user.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
 
-                }
-            });
-
-
-        return view;
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (ua != null)
-            ua.notifyDataSetChanged();
-
+            }
+        });
     }
 }
 
